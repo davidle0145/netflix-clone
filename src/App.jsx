@@ -1,8 +1,10 @@
 import React from 'react'
+import Home from './home/Home'
+import './app.scss'
 
 const App = () => {
   return (
-    <div>Hello World!</div>
+    <Home/>
   )
 }
 
