@@ -29,7 +29,7 @@ export const updateUser = async (req, res) => {
             success: false,
             message: "You can update only your account!"
         })
-    }
+    } 
     
 }
 
