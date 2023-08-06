@@ -102,7 +102,9 @@ export const getRandomMovie = async (req, res) => {
                 { $sample: {size: 1}}
             ])
         }
-        res.status(200).json(movie)
+        res.status(200).json({
+            data: movie
+        })
 
     } catch (err) {
         res.status(500).json({
@@ -121,7 +123,7 @@ export const getAllMovie = async (req, res) => {
                 count: movies.length,
                 message: "Get All Movie Successful",
                 data: movies.reverse()
-            })
+            })   
         } catch (err) {
             res.status(500).json({
                 success: false,

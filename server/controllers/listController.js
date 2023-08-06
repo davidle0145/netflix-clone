@@ -97,7 +97,7 @@ export const getAllList = async (req, res) => {
                 {$sample: {size:10}}
             ])
         }
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             count: list.length,
             message: "Successfully get All List",

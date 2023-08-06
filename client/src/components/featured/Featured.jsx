@@ -1,13 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './featured.scss'
 import { InfoOutlined, PlayArrow } from '@material-ui/icons'
+import axios from 'axios'
 
 const Featured = ({type}) => {
+    const [content, setContent] = useState({})
+    
+    useEffect(() => {
+        const getRandomContent = async() => {
+            try {
+                const res = await axios.get(`/movies/random?type=${type}`,
+                { headers: {
+                    token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2NjMTcwYjUzYTcyYmQ0OWI0NDdkNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY5MTE1MjgwNiwiZXhwIjoxNjkyMDE2ODA2fQ.wVZGDkistq5vIy5AKuHuZBAevGe_r2g9PqT1-mjdVd0"
+                }})
+                setContent(res.data.data[0])
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getRandomContent()
+    }, [type])
+
   return (
     <div className='featured'>
         {type && (
             <div className="category">
-                <span>{type === "movie" ? "Movies" : "Series"}</span>
+                <span>{type === "movies" ? "Movies" : "Series"}</span>
                 <select name="genre" id="genre">
                     <option>Genre</option>
                     <option value="adventure">Adventure</option>
@@ -26,13 +44,11 @@ const Featured = ({type}) => {
                 </select>
             </div>
         )}
-        <img src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+        <img src={content.img} alt="" />
     
         <div className="info">
-            <img src="https://imgv3.fotor.com/images/blog-richtext-image/part-blurry-image.jpg" alt="" />
-            <span className="desc">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima, quis eum reiciendis, dolorum debitis perspiciatis ipsa illo, voluptatum voluptas nemo facere nesciunt inventore qui ex hic enim doloribus. Nobis, ad!
-            </span>
+            <img src={content.imgTitle} alt="" />
+            <span className="desc">{content.desc}</span>
             <div className="buttons">
                 <button className="play">
                     <PlayArrow/>
