@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useRef, useState } from 'react'
 import './list.scss'
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from '@material-ui/icons'
 import ListItem from '../listItem/ListItem'
