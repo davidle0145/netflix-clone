@@ -24,7 +24,7 @@ const ListItem = ({item, index}) => {
   }, [item])
 
   return (
-    <Link to={{pathname: "/watch", movie: movie}}>
+    <Link to={{pathname: "/watch"}} state={{movie: movie}}>
       <div className='list-item' style={{left: isHovered && (index * 225 - 50 + index * 2.5)}} 
         onMouseEnter={()=> setIsHovered(true)} onMouseLeave={()=> setIsHovered(false)}>
         <img src={movie.img} alt="" />

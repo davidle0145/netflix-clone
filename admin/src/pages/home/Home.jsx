@@ -42,8 +42,6 @@ export default function Home() {
     getStats()
   }, [months])
 
-  console.log(userStats);
-
   return (
     <div className="home">
       <FeaturedInfo />

@@ -20,10 +20,12 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login/>} />  
-        {user && <>
-          <Topbar />
-          <div className="container">
-            <Sidebar />
+      </Routes>
+      {user && <>
+        <Topbar />
+        <div className="container">
+          <Sidebar />
+          <Routes>  
             <Route path="/" element={<Home />} />
             <Route path="/users" element={<UserList />} />
             <Route path="/user/:userId" element={<User />} />
@@ -31,9 +33,9 @@ function App() {
             <Route path="/movies" element={<ProductList />} />
             <Route path="/movies/find/:id" element={<Product />} />
             <Route path="/movies/create" element={<NewProduct />} /> 
-          </div>
-        </>}
-      </Routes>
+          </Routes>
+        </div>
+      </>}
     </Router>
   )
 }
