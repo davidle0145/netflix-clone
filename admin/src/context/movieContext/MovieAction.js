@@ -1,3 +1,4 @@
+//GET Movie
 export const getMovieStart = () => ({
     type: "GET_MOVIE_START"
 })
@@ -11,6 +12,35 @@ export const getMovieFailure = () => ({
     type: "GET_MOVIE_FAILURE"
 })
 
+//CREATE Movie
+export const createMovieStart = () => ({
+    type: "CREATE_MOVIE_START"
+})
+
+export const createMovieSuccess = (movie) => ({
+    type: "CREATE_MOVIE_SUCCESS",
+    payload: movie
+})
+
+export const createMovieFailure = () => ({
+    type: "CREATE_MOVIE_FAILURE"
+})
+
+//UPDATE Movie
+export const updateMovieStart = () => ({
+    type: "UPDATE_MOVIE_START"
+})
+
+export const updateMovieSuccess = (movie) => ({
+    type: "UPDATE_MOVIE_SUCCESS",
+    payload: movie
+})
+
+export const updateMovieFailure = () => ({
+    type: "UPDATE_MOVIE_FAILURE"
+})
+
+//DELETE Movie
 export const deleteMovieStart = () => ({
     type: "DELETE_MOVIE_START"
 })

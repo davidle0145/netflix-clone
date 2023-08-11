@@ -1,4 +1,4 @@
-import "./productList.css";
+import "./movieList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useContext, useEffect } from "react";
 import { MovieContext } from "../../context/movieContext/MovieContext.js"
 import { getMovie, deleteMovie } from "../../context/movieContext/apiCalls.js"
 
-export default function ProductList() {
+export default function MovieList() {
   const {movies, dispatch} = useContext(MovieContext);
 
   useEffect(() => {
@@ -25,8 +25,8 @@ export default function ProductList() {
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
+          <div className="movieListItem">
+            <img className="movieListImg" src={params.row.img} alt="" />
             {params.row.title}
           </div>
         );
@@ -44,10 +44,10 @@ export default function ProductList() {
         return (
           <>
             <Link to={{pathname:"/movies/find/" + params.row._id}} state={{movie: params.row}}>
-              <button className="productListEdit">Edit</button>
+              <button className="movieListEdit">Edit</button>
             </Link>
             <DeleteOutline
-              className="productListDelete"
+              className="movieListDelete"
               onClick={() => handleDelete(params.row._id)}
             />
           </>
@@ -57,7 +57,13 @@ export default function ProductList() {
   ];
 
   return (
-    <div className="productList">
+    <div className="movieList">
+      <div className="movieTitleContainer">
+        <h1 className="movieTitle">Movie List</h1>
+        <Link to="/movies/create">
+          <button className="movieAddButton">Create</button>
+        </Link>
+      </div>
       <DataGrid
         rows={movies}
         disableSelectionOnClick

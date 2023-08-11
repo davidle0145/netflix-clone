@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
-import ProductList from "./pages/productList/ProductList";
-import Product from "./pages/product/Product";
-import NewProduct from "./pages/newProduct/NewProduct";
+import MovieList from "./pages/movieList/MovieList";
+import Movie from "./pages/movie/Movie";
+import NewMovie from "./pages/newMovie/NewMovie";
 import Login from "./pages/login/Login";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
@@ -30,9 +30,9 @@ function App() {
             <Route path="/users" element={<UserList />} />
             <Route path="/user/:userId" element={<User />} />
             <Route path="/newUser" element={<NewUser />} />
-            <Route path="/movies" element={<ProductList />} />
-            <Route path="/movies/find/:id" element={<Product />} />
-            <Route path="/movies/create" element={<NewProduct />} /> 
+            <Route path="/movies" element={<MovieList />} />
+            <Route path="/movies/find/:id" element={<Movie />} />
+            <Route path="/movies/create" element={<NewMovie />} /> 
           </Routes>
         </div>
       </>}
