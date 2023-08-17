@@ -28,7 +28,7 @@ export const createMovie = async(movie, dispatch) => {
                 token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken
             }
         })
-        dispatch(createMovieSuccess(res.data))
+        dispatch(createMovieSuccess(res.data.data))
     } catch (err) {
         dispatch(createMovieFailure())
     }
@@ -37,12 +37,12 @@ export const createMovie = async(movie, dispatch) => {
 export const updateMovie = async(movie, dispatch) => {
     dispatch(updateMovieStart())
     try {
-        const res = await axios.put("/movies", movie, {
+        const res = await axios.put("/movies/" + movie._id, movie, {
             headers: {
                 token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken
             }
         })
-        dispatch(updateMovieSuccess(res.data))
+        dispatch(updateMovieSuccess(res.data.data))
     } catch (err) {
         dispatch(updateMovieFailure())
     }

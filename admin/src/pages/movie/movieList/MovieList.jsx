@@ -3,8 +3,8 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { MovieContext } from "../../context/movieContext/MovieContext.js"
-import { getMovie, deleteMovie } from "../../context/movieContext/apiCalls.js"
+import { MovieContext } from "../../../context/movieContext/MovieContext.js"
+import { getMovie, deleteMovie } from "../../../context/movieContext/apiCalls.js"
 
 export default function MovieList() {
   const {movies, dispatch} = useContext(MovieContext);
@@ -18,11 +18,11 @@ export default function MovieList() {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 150 },
     {
       field: "movie",
       headerName: "Movie",
-      width: 200,
+      width: 250,
       renderCell: (params) => {
         return (
           <div className="movieListItem">
@@ -32,10 +32,10 @@ export default function MovieList() {
         );
       },
     },
-    { field: "genre", headerName: "Genre", width: 120 },
+    { field: "genre", headerName: "Genre", width: 150 },
     { field: "year", headerName: "Year", width: 120 },
     { field: "limit", headerName: "Limit", width: 120 },
-    { field: "isSeries", headerName: "isSeries", width: 120 },
+    { field: "isSeries", headerName: "isSeries", width: 130 },
     {
       field: "action",
       headerName: "Action",
@@ -68,7 +68,7 @@ export default function MovieList() {
         rows={movies}
         disableSelectionOnClick
         columns={columns}
-        pageSize={8}
+        pageSize={10}
         checkboxSelection
         getRowId={(r) => r._id}
       />

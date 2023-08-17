@@ -1,12 +1,15 @@
-import { useContext, useState } from "react";
-import "./newMovie.css";
-import {storage} from "../../firebase.js"
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import "./movieNew.css"
+import {storage} from "../../../firebase.js"
 import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid"
-import { createMovie } from "../../context/movieContext/apiCalls.js"
-import { MovieContext } from "../../context/movieContext/MovieContext.js"
+import { createMovie } from "../../../context/movieContext/apiCalls.js"
+import { MovieContext } from "../../../context/movieContext/MovieContext.js"
+import { GenreContext } from "../../../context/genreContext/GenreContext.js"
+import { getGenre } from "../../../context/genreContext/apiCalls.js"
 
-export default function NewMovie() {
+export default function MovieNew() {
   const [movie, setMovie] = useState(null)
   const [img, setImg] = useState(null)
   const [imgTitle, setImgTitle] = useState(null)
@@ -17,6 +20,12 @@ export default function NewMovie() {
   
   const metadata = {contentType: 'image/jpeg'}
   const {dispatch} = useContext(MovieContext)
+  const {genres, dispatch: dispatchGenre} = useContext(GenreContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getGenre(dispatchGenre)
+  }, [dispatchGenre])
 
   const handleChange = (e) => {
     const value = e.target.value
@@ -59,11 +68,12 @@ export default function NewMovie() {
   const handleSubmit = (e) => {
     e.preventDefault()
     createMovie(movie, dispatch)
+    navigate('/movies', {replace: true});
   }
 
   return (
     <div className="newMovie">
-      <h1 className="addMovieTitle">New Movie</h1>
+      <h1 className="addMovieTitle">Movie New</h1>
       <form className="addMovieForm">
         <div className="addMovieItem">
           <label>Image</label>
@@ -91,7 +101,11 @@ export default function NewMovie() {
         </div>
         <div className="addMovieItem">
           <label>Genre</label>
-          <input type="text" placeholder="genre" name="genre" onChange={handleChange}/>
+          <select name="genre" id="genre" onChange={handleChange}>
+            {genres.map((genre) => (
+              <option key={genre._id} value={genre._id}>{genre.title}</option>
+            ))}
+          </select>
         </div>
         <div className="addMovieItem">
           <label>Duration</label>

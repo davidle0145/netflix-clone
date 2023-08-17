@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './featured.scss'
 import { InfoOutlined, PlayArrow } from '@material-ui/icons'
 import axios from 'axios'
+import { GenreContext} from '../../context/genreContext/GenreContext.js'
+import { getGenre } from '../../context/genreContext/apiCalls.js'
 
-const Featured = ({type}) => {
+const Featured = ({type, setGenre}) => {
     const [content, setContent] = useState({})
-    
+    const {genres, dispatch} = useContext(GenreContext);
+
     useEffect(() => {
         const getRandomContent = async() => {
             try {
                 const res = await axios.get(`/movies/random?type=${type}`,
                 { headers: {
-                    token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2NjMTcwYjUzYTcyYmQ0OWI0NDdkNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY5MTE1MjgwNiwiZXhwIjoxNjkyMDE2ODA2fQ.wVZGDkistq5vIy5AKuHuZBAevGe_r2g9PqT1-mjdVd0"
+                    token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken
                 }})
                 setContent(res.data.data[0])
             } catch (err) {
@@ -19,28 +22,18 @@ const Featured = ({type}) => {
             }
         }
         getRandomContent()
-    }, [type])
+        getGenre(dispatch)
+    }, [type, dispatch])
 
   return (
     <div className='featured'>
         {type && (
             <div className="category">
-                <span>{type === "movies" ? "Movies" : "Series"}</span>
-                <select name="genre" id="genre">
-                    <option>Genre</option>
-                    <option value="adventure">Adventure</option>
-                    <option value="comedy">Comedy</option>
-                    <option value="crime">Crime</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="historical">Historical</option>
-                    <option value="horror">Horror</option>
-                    <option value="romance">Romance</option>
-                    <option value="sci-fi">Sci-fi</option>
-                    <option value="thriller">Thriller</option>
-                    <option value="western">Western</option>
-                    <option value="animation">Animation</option>
-                    <option value="drama">Drama</option>
-                    <option value="documentary">Documentary</option>
+                <span>{type === "Movies" ? "Movies" : "Series"}</span>
+                <select name="genre" id="genre" onChange={(e) => setGenre(e.target.value)}>
+                    {genres.map((genre) => (
+                        <option key={genre._id} value={genre._id}>{genre.title}</option>
+                    ))}
                 </select>
             </div>
         )}

@@ -1,6 +1,6 @@
-import "./newUser.css";
+import "./userNew.css";
 
-export default function NewUser() {
+export default function UserNew() {
   return (
     <div className="newUser">
       <h1 className="newUserTitle">New User</h1>

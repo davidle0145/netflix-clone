@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './navbar.scss'
 import { ArrowDropDown, Notifications, Search } from '@material-ui/icons'
 import {Link} from "react-router-dom"
+import { AuthContext } from '../../context/authContext/AuthContext.js'
+import { logout } from '../../context/authContext/AuthAction.js'
 
 const Navbar = () => {
-
   const [isScrolled, setIsScrolled] = useState(false)
+  const { dispatch } = useContext(AuthContext)
+
   window.onscroll = () => {
     setIsScrolled(window.scrollY === 0 ? false : true) // window.pageYOffset is deprecated.
     return () => (window.onscroll = null)
@@ -42,6 +45,7 @@ const Navbar = () => {
                 <ArrowDropDown className="icon"/>
                 <div className="options">
                   <span>Settings</span>
+                  {/* onClick={dispatch(logout())} */}
                   <span>Logout</span>
                 </div>
               </div>

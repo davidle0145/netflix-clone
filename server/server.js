@@ -6,10 +6,11 @@ import authRoute from './routes/auth.js'
 import listRoute from './routes/lists.js'
 import movieRoute from './routes/movies.js'
 import userRoute from './routes/users.js'
+import genreRoute from './routes/genres.js'
 
 dotenv.config()
 const app = express()
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 4001
 
 // database connection
 const connect = async() => {
@@ -34,6 +35,7 @@ app.use("/api/auth", authRoute)
 app.use("/api/lists", listRoute)
 app.use("/api/movies", movieRoute)
 app.use("/api/users", userRoute)
+app.use("/api/genres", genreRoute)
 
 
 //
